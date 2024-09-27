@@ -10,17 +10,9 @@ if ! [ -d "./.git" ]; then
     exit 1
 fi
 
-# If .NET is not installed, exit
-if ! command -v dotnet &> /dev/null; then
-    echo "Error: .NET is not installed"
-    exit 1
-fi
-
-# If the installed .NET version is less than 3.0, exit
-dotnetVersion=$(dotnet --version)
-dotnetMajorVersion=$(echo $dotnetVersion | cut -d. -f1)
-if [ $(("$dotnetMajorVersion")) -lt 3 ]; then
-    echo "Error: .NET version must be >= 3.0"
+# If .NET 3.0 or later is not installed, exit
+if ! command -v dotnet &> /dev/null || [ $(dotnet --version | cut -d. -f1) -lt 3 ]; then
+    echo "Error: .NET 3.0 or later is not installed"
     exit 1
 fi
 
