@@ -1,8 +1,8 @@
 #!/bin/bash
 
-localPreCommitFilePath="./.git/hooks/pre-commit"
-localDotnetManifestFilePath="./.config/dotnet-tools.json"
-preCommitFileUrl="https://raw.githubusercontent.com/casuology/resharper-git-hook/main/pre-commit.sh"
+preCommitPath="./.git/hooks/pre-commit"
+dotnetManifestPath="./.config/dotnet-tools.json"
+preCommitUrl="https://raw.githubusercontent.com/casuology/resharper-git-hook/main/pre-commit.sh"
 
 # If a .git folder does not exist, exit
 if ! [ -d "./.git" ]; then
@@ -16,13 +16,13 @@ if ! command -v dotnet &> /dev/null || [ $(dotnet --version | cut -d. -f1) -lt 3
     exit 1
 fi
 
-# Overwrite the pre-commit file by fetching it from the repository
-echo "Info: Fetching pre-commit file from repository"
-curl -o "$localPreCommitFilePath" "$preCommitFileUrl"
-chmod +x "$localPreCommitFilePath"
+# Overwrite the hook file by fetching it from the repository
+echo "Info: Fetching git hook file from repository"
+curl -o "$preCommitPath" "$preCommitUrl"
+chmod +x "$preCommitPath"
 
 # If a dotnet tool manifest file does not exist, create it
-if ! [ -f "$localDotnetManifestFilePath" ]; then
+if ! [ -f "$dotnetManifestPath" ]; then
     echo "Info: Creating dotnet tool manifest file"
     dotnet new tool-manifest
 fi
