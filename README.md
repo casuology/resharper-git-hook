@@ -1,6 +1,6 @@
 # ReSharper Command Line Tools Git Hook
 
-This is a pre-commit hook for git that will run code cleanup with [ReSharper Command Line Tools](https://www.jetbrains.com/help/resharper/ReSharper_Command_Line_Tools.html) on staged files.
+This is a pre-commit hook for git that will run code cleanup with [ReSharper Command Line Tools](https://www.jetbrains.com/help/resharper/ReSharper_Command_Line_Tools.html) on files that are being committed.
 
 ## Prerequisites
 
