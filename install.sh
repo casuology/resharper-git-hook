@@ -16,12 +16,10 @@ if ! command -v dotnet &> /dev/null || [ $(dotnet --version | cut -d. -f1) -lt 3
     exit 1
 fi
 
-# If the pre-commit file does not exist, fetch it from the repository
-if ! [ -f "$localPreCommitFilePath" ]; then
-    echo "Info: Fetching pre-commit file from repository"
-    curl -o "$localPreCommitFilePath" "$preCommitFileUrl"
-    chmod +x "$localPreCommitFilePath"
-fi
+# Overwrite the pre-commit file by fetching it from the repository
+echo "Info: Fetching pre-commit file from repository"
+curl -o "$localPreCommitFilePath" "$preCommitFileUrl"
+chmod +x "$localPreCommitFilePath"
 
 # If a dotnet tool manifest file does not exist, create it
 if ! [ -f "$localDotnetManifestFilePath" ]; then
